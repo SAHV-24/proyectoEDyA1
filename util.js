@@ -1,73 +1,59 @@
 let button = document.getElementById("asd");
 let input = document.getElementById("Entrada");
+let results = document.getElementById("scoreboard");
 
-button.addEventListener("click", function() {
-    calcularScoreBoard(input);
+button.addEventListener("click", function () {
+  calcularScoreBoard(input);
 });
 
-function calcularScoreBoard(caso){
+function calcularScoreBoard(caso) {
+  console.time("a");
+  caso = caso.value.split(";").map((x) => x.trim().split(" "));
+  let scoreboard = "";
 
-    caso = caso.value;
-    caso = caso.split(";")
-    caso=caso.map((x)=>x.split(" "))
-    let scoreboard=[]
+  //Busca entre los 100 equipos
+  for (let j = 1; j <= 100; j++) {
+    // Filtra todos los arreglos que sean del equipo J
+    let FilteredArray = caso.filter((x) => x[0] === `Team${j}`);
 
+    let cantProblemas = 0; // Declaro la cantidad de problemas
+    let times = 0;
 
-    //Busca entre los 100 equipos
-    for(let j=1;j<=100;j++){
+    if (FilteredArray.length > 0) {
+      for (let i = 1; i < 10; i++) {
+        let problemas = FilteredArray.filter((x) => x[1] == i); // Filtrar los X que tengan ese problema
 
-        
-            // Filtra todos los arreglos que sean del equipo J
-        let FilteredArray = caso.filter(x=>x[0]===`Team${j}`)
-
-        // Si no encontró equipos, entonces no entrar
-        if(FilteredArray.length!=0){
-        // 10 problemas
-        for(let i = 0; i<10; i++){
-            //para acumular el tiempo:
-            let total = 0;
-
-            //Para filtrar aquellos que no hayan sido completados
-            let band=0;
-            
-            // Filtra todos los arreglos que hayan mandado el problema I
-            let provi= FilteredArray.filter(x=>x[1]==i)
-            
-            // Si no encuentra nada en el arreglo, no entrar, osea, si no han resuelto X problema o no existe ese equipo, entonces omitir
-            if (provi.length != 0 && band==0){
-            
-            provi.forEach((x)=>{
-                
-                    // Suma cada uno
-                    total+=parseInt(x[2])
-
-                    // Si el ejercicio resuelto tiene una I entonces aumentarle 20
-                    if (x[3]=="I"){
-                        total+=20
-                    }
-
-                    // Si está completado el problema, salirse
-                    if(x[3]=="C"){
-                            band=1;
-                    }
-
-            })
-            if (band==1){
-                // meter los problemas que SI fueron solucionados
-                scoreboard.push([provi[0][0],i,total]);
-           
-                    }
-                }     
+        if (problemas.length > 0) {
+          let band = 0;
+          // Si no encontró nada que no entre
+          let incorrects = 0; // respuestas incorrectas
+          let correctTime = 0; // tiempo de la respuesta correcta
+          problemas.forEach((x) => {
+            if (x[3].toLowerCase() == "i" && band == 0) {
+              incorrects++;
             }
+            if (x[3].toLowerCase() == "c" && band == 0) {
+              band = 1;
+              correctTime = parseInt(x[2]);
+              cantProblemas++;
+              return;
+            }
+          });
+          if (correctTime != 0) {
+            times += incorrects * 20 + correctTime;
+            console.log(times + "\n" + cantProblemas);
+          }
         }
+      }
+      if (times > 0) {
+        scoreboard += `Team${j} ${cantProblemas} ${times}\n`;
+      }
     }
-        // resultados:
-        console.log(scoreboard)
-    }
-        
-        
-    
-    
-    // console.log(caso)
-    // Team1 1 5 C;Team2 5 10 C;Team3 2 15 I;Team1 3 20 R;Team2 1 25 R;
-    // Team2 4 30 C;Team1 3 35 I;Team1 3 40 C;Team3 2 45 I;Team3 2 50 C
+  }
+
+  // resultados:
+
+  console.timeEnd("a");
+
+  results.textContent = scoreboard;
+}
