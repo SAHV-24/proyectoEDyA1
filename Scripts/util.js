@@ -1,5 +1,5 @@
-let button = document.getElementById("asd");
-let input = document.getElementById("Entrada");
+let button = document.getElementById("button");
+let input = document.getElementById("input");
 let results = document.getElementById("scoreboard");
 
 function compare(a, b) {

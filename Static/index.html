@@ -4,14 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script type="module" src="./util.js"></script>
+    <script type="module" src="../Scripts/util.js"></script>
   </head>
   <body>
-    <h1>Entrada</h1>
-    <input type="text" name="" id="Entrada" autocomplete="on" />
-    <button id="asd">Enviar</button>
-    <br /><br /><br />
-    <textarea name="" id="scoreboard" cols="30" rows="10"></textarea>
+    <!-- idInput input -->
+    <!-- idSalida  scoreboard -->
+    <!-- id Botón button -->
+
+    <nav id="navBar">
+      <div>
+        <img src="./assets/placeholders/ICPC-Logo.jpg" width="50px" />
+      </div>
+      <div>
+        <a href="./home.html">Home </a>
+      </div>
+      <div><a href="./index.html">Live Results</a></div>
+    </nav>
   </body>
 </html>
 
@@ -19,5 +27,17 @@
   input {
     width: 400px;
     height: 200px;
+  }
+
+  #navBar {
+    display: flex;
+  }
+
+  a {
+    text-align: center;
+  }
+
+  a:hover {
+    color: orangered;
   }
 </style>
