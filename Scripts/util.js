@@ -1,69 +1,29 @@
-// function quickSort(A, p, r, mode) {
-//   if (p < r) {
-//     let q;
-//     if (mode === "ascendente") {
-//       q = partition(A, p, r, "ascendente");
-//     } else if (mode === "descendente") {
-//       q = partition(A, p, r, "descendente");
-//     }
-//     quickSort(A, p, q - 1, mode);
-//     quickSort(A, q + 1, r, mode);
-//   }
-// }
-
-// function partition(A, p, r, mode) {
-//   let pivot;
-//   if (mode === "descendente") {
-//     pivot = A[r][1];
-//   }
-
-//   if (mode === "ascendente") {
-//     pivot = A[r][2];
-//   }
-
-//   let i = p - 1;
-//   let aux;
-
-//   for (let j = p; j <= r - 1; j++) {
-//     if (
-//       (mode === "ascendente" && A[j][2] < pivot) ||
-//       (mode === "descendente" && A[j][1] > pivot)
-//     ) {
-//       i++;
-//       aux = A[j];
-//       A[j] = A[i];
-//       A[i] = aux;
-//     }
-//   }
-
-//   aux = A[r];
-//   A[r] = A[i + 1];
-//   A[i + 1] = aux;
-//   return i + 1;
-// }
-
-
+let button = document.getElementById("asd");
+let input = document.getElementById("Entrada");
+let results = document.getElementById("scoreboard");
 
 function compare(a, b) {
   // Comparar los problemas
   if (a[1] > b[1]) return -1;
   if (a[1] < b[1]) return 1;
-    
   else {
     // Si los problemas son iguales:
     if (a[2] > b[2]) return 1;
     if (a[2] < b[2]) return -1;
-    return 0;
-
+    else {
+      if (a[0] < b[0]) return 1;
+      if (a[0] < b[0]) return -1;
+      return 0;
+    }
   }
 }
 
-let caso =
-  "Team1 1 5 C;Team2 5 10 C;Team3 2 15 I;Team1 3 20 R;Team2 1 25 R;Team2 4 30 C;Team1 3 35 I;Team1 3 40 C;Team3 2 45 I;Team3 2 50 C;Team5 5 10 C;Team5 9 10 C;Team5 6 900 C";
+button.addEventListener("click", function () {
+  calcularScoreBoard(input);
+});
 
 function calcularScoreBoard(caso) {
-  caso = caso.split(";").map((x) => x.trim().split(" "));
-  let scoreboard = "";
+  caso = caso.value.split(";").map((x) => x.trim().split(" "));
   let arr = [];
 
   //Busca entre los 100 equipos
@@ -102,7 +62,7 @@ function calcularScoreBoard(caso) {
       }
     }
   }
-  return arr.sort(compare).map(x=>x+"\n");
+  let scoreboard = "";
+  arr.sort(compare).forEach((x) => (scoreboard += x + "\n"));
+  results.textContent = scoreboard;
 }
-
-console.log(calcularScoreBoard(caso));
