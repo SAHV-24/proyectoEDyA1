@@ -2,22 +2,37 @@ let button = document.getElementById("asd");
 let input = document.getElementById("Entrada");
 let results = document.getElementById("scoreboard");
 
+function compare(a, b) {
+  // Comparar los problemas
+  if (a[1] > b[1]) return -1;
+  if (a[1] < b[1]) return 1;
+  else {
+    // Si los problemas son iguales:
+    if (a[2] > b[2]) return 1;
+    if (a[2] < b[2]) return -1;
+    else {
+      if (a[0] < b[0]) return 1;
+      if (a[0] < b[0]) return -1;
+      return 0;
+    }
+  }
+}
+
 button.addEventListener("click", function () {
   calcularScoreBoard(input);
 });
 
 function calcularScoreBoard(caso) {
-  console.time("a");
   caso = caso.value.split(";").map((x) => x.trim().split(" "));
-  let scoreboard = "";
+  let arr = [];
 
   //Busca entre los 100 equipos
   for (let j = 1; j <= 100; j++) {
     // Filtra todos los arreglos que sean del equipo J
     let FilteredArray = caso.filter((x) => x[0] === `Team${j}`);
 
-    let cantProblemas = 0; // Declaro la cantidad de problemas
-    let times = 0;
+    let totalProblems = 0;
+    let totalTime = 0;
 
     if (FilteredArray.length > 0) {
       for (let i = 1; i < 10; i++) {
@@ -25,7 +40,6 @@ function calcularScoreBoard(caso) {
 
         if (problemas.length > 0) {
           let band = 0;
-          // Si no encontró nada que no entre
           let incorrects = 0; // respuestas incorrectas
           let correctTime = 0; // tiempo de la respuesta correcta
           problemas.forEach((x) => {
@@ -35,25 +49,20 @@ function calcularScoreBoard(caso) {
             if (x[3].toLowerCase() == "c" && band == 0) {
               band = 1;
               correctTime = parseInt(x[2]);
-              cantProblemas++;
-              return;
+              totalProblems++;
             }
           });
           if (correctTime != 0) {
-            times += incorrects * 20 + correctTime;
-            console.log(times + "\n" + cantProblemas);
+            totalTime += incorrects * 20 + correctTime;
           }
         }
       }
-      if (times > 0) {
-        scoreboard += `Team${j} ${cantProblemas} ${times}\n`;
+      if (totalTime > 0) {
+        arr.push([`Team${j}`, totalProblems, totalTime]);
       }
     }
   }
-
-  // resultados:
-
-  console.timeEnd("a");
-
+  let scoreboard = "";
+  arr.sort(compare).forEach((x) => (scoreboard += x + "\n"));
   results.textContent = scoreboard;
 }

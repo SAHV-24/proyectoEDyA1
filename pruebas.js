@@ -1,45 +1,61 @@
-function quickSort(A, p, r, mode) {
-  if (p < r) {
-    let q;
-    if (mode === "ascendente") {
-      q = partition(A, p, r, "ascendente");
-    } else if (mode === "descendente") {
-      q = partition(A, p, r, "descendente");
-    }
-    quickSort(A, p, q - 1, mode);
-    quickSort(A, q + 1, r, mode);
+// function quickSort(A, p, r, mode) {
+//   if (p < r) {
+//     let q;
+//     if (mode === "ascendente") {
+//       q = partition(A, p, r, "ascendente");
+//     } else if (mode === "descendente") {
+//       q = partition(A, p, r, "descendente");
+//     }
+//     quickSort(A, p, q - 1, mode);
+//     quickSort(A, q + 1, r, mode);
+//   }
+// }
+
+// function partition(A, p, r, mode) {
+//   let pivot;
+//   if (mode === "descendente") {
+//     pivot = A[r][1];
+//   }
+
+//   if (mode === "ascendente") {
+//     pivot = A[r][2];
+//   }
+
+//   let i = p - 1;
+//   let aux;
+
+//   for (let j = p; j <= r - 1; j++) {
+//     if (
+//       (mode === "ascendente" && A[j][2] < pivot) ||
+//       (mode === "descendente" && A[j][1] > pivot)
+//     ) {
+//       i++;
+//       aux = A[j];
+//       A[j] = A[i];
+//       A[i] = aux;
+//     }
+//   }
+
+//   aux = A[r];
+//   A[r] = A[i + 1];
+//   A[i + 1] = aux;
+//   return i + 1;
+// }
+
+
+
+function compare(a, b) {
+  // Comparar los problemas
+  if (a[1] > b[1]) return -1;
+  if (a[1] < b[1]) return 1;
+    
+  else {
+    // Si los problemas son iguales:
+    if (a[2] > b[2]) return 1;
+    if (a[2] < b[2]) return -1;
+    return 0;
+
   }
-}
-
-function partition(A, p, r, mode) {
-  let pivot;
-  if (mode === "descendente") {
-    pivot = A[r][1];
-  }
-
-  if (mode === "ascendente") {
-    pivot = A[r][2];
-  }
-
-  let i = p - 1;
-  let aux;
-
-  for (let j = p; j <= r - 1; j++) {
-    if (
-      (mode === "ascendente" && A[j][2] < pivot) ||
-      (mode === "descendente" && A[j][1] > pivot)
-    ) {
-      i++;
-      aux = A[j];
-      A[j] = A[i];
-      A[i] = aux;
-    }
-  }
-
-  aux = A[r];
-  A[r] = A[i + 1];
-  A[i + 1] = aux;
-  return i + 1;
 }
 
 let caso =
@@ -85,16 +101,8 @@ function calcularScoreBoard(caso) {
         arr.push([`Team${j}`, totalProblems, totalTime]);
       }
     }
-
-    // quickSort(arr, 0, arr.length - 1, "desc");
   }
-
-  return arr;
+  return arr.sort(compare).map(x=>x+"\n");
 }
 
-let a = calcularScoreBoard(caso);
-
-quickSort(a, 0, 3, "ascendente");
-quickSort(a, 0, 3, "descendente");
-
-console.log(a);
+console.log(calcularScoreBoard(caso));
