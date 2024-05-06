@@ -12,11 +12,11 @@ nav {
 
 a {
   text-decoration: none;
-  color: deepskyblue;
+  color: white;
 }
 
 a:hover {
-  color: #f96400;
+  color: gray;
 }
 ul li {
   display: inline-block;
@@ -25,10 +25,31 @@ ul li {
 
 #selected {
   border-radius: 20px;
-  background-color: #f97109;
+  background-color: #33c1de;
+  box-shadow: 20%;
 }
 
 #selected a:hover {
-  color: deepskyblue;
-  text-decoration: underline;
+  color: gray;
+}
+
+header {
+  position: fixed;
+  background-color: #ff6702e3;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#navBar img {
+  padding-top: 4px;
+  padding-bottom: 10px;
+}
+
+main {
+  margin-top: 100px;
+}
+
+main h1 {
+  align-self: center;
 }
