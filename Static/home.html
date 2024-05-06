@@ -6,16 +6,52 @@
     <title>Document</title>
   </head>
   <body>
-    <nav id="navBar">
-      <div
-        <img src="./assets/placeholders/ICPC-Logo.jpg" width="30px" height=""/>
-      </div>
-      <div>
-        <a href="./home.html">Home </a>
-      </div>
-      <div><a href="./index.html">Live Results</a></div>
-    </nav>
+    <div id="flexBar">
+      <nav id="navBar">
+        <div>
+          <img src="./assets/placeholders/ICPC-Logo.jpg" width="70px" />
+        </div>
+        <div>
+          <a href="./home.html">Home </a>
+        </div>
+        <div><a href="./index.html">Live Results</a></div>
+      </nav>
+    </div>
 
     holi
   </body>
 </html>
+
+<style>
+  input {
+    width: 400px;
+    height: 200px;
+  }
+
+  #navBar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    width: 300px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+  }
+
+  #flexBar {
+    display: flex;
+    justify-content: center;
+  }
+
+  a {
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: cornflowerblue;
+  }
+
+  a:hover {
+    color: orangered;
+  }
+</style>
