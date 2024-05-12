@@ -10,7 +10,7 @@
   <body>
     <header>
       <nav id="navBar">
-        <img src="./assets/placeholders/icpc-logo.png" width="70px" />
+        <img src="./assets/placeholders/icpc-logo.png" width="90px" />
         <ul>
           <li><a href="./home.html">Home </a></li>
           <li id="selected"><a href="./results.html">Live Results</a></li>
@@ -18,6 +18,29 @@
       </nav>
     </header>
 
-    <main><h1>Results:</h1></main>
+    <main>
+      <main class="table">
+        <section class="table__body">
+          <table>
+            <thead>
+              <tr>
+                <th>Team <span class="icon-arrow">&UpArrow;</span></th>
+                <th>Solved Problems <span class="icon-arrow">&DownArrow;</span></th>
+                <th>Total Time<span class="icon-arrow">&UpArrow;</span></th>
+              </tr>
+            </thead>
+            <tbody id="scoreboard"></tbody>
+          </table>
+        </section>
+        
+      </main>
+      <section id="logic">
+        <h1 id="title">Results:</h1>
+        <div id="results"></div>
+
+        <input name="" type="text" autocomplete="off" id="input" />
+        <button id="button" class="button"><span>Send!</span></button>
+      </section>
+    </main>
   </body>
 </html>

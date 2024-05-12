@@ -63,6 +63,11 @@ function calcularScoreBoard(caso) {
     }
   }
   let scoreboard = "";
-  arr.sort(compare).forEach((x) => (scoreboard += x + "\n"));
-  results.textContent = scoreboard;
+  arr
+    .sort(compare)
+    .forEach(
+      (x) =>
+        (scoreboard += `<tr> <td class="col1"> ${x[0]}</td> <td class="col2"> ${x[1]}</td> <td class="col3"> ${x[2]}</td> </tr>`)
+    );
+  results.innerHTML = scoreboard;
 }
