@@ -60,7 +60,7 @@ function calcularScoreBoard(caso) {
                 tiempoCorrecto = parseInt(x[2])
                 seCompleto = true
   
-              }
+                }
 
               }
                   
