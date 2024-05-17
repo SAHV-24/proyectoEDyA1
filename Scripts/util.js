@@ -23,7 +23,7 @@ button.addEventListener("click", function () {
 });
 
 function calcularScoreBoard(caso) {
-    caso = caso.split(";").map(entry => entry.split(" "));
+    caso = caso.split(";").map(x => x.split(" "));
     let arr = [];
     let equipos = [];
 
