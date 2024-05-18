@@ -398,68 +398,13 @@ thead tr th{
 }
 
 
-#contactSection {
-  height: min;
-  text-align: center;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  width: 1920px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-#contactSection h2 {
-  font-size: 2em;
-  color: #141414;
-  margin-bottom: 20px;
-}
-
-#contactSection p {
-  font-size: 1.3em;
-  color: #666;
-  margin-bottom: 10px;
-}
-
-#contactSection ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-#contactSection ul li {
-  font-size: 1.3em;
-  color: #666;
-  margin-bottom: 10px;
-}
-
-#contactSection ul li a {
-  color: #1b77d9;
-  text-decoration: none;
-}
-
-#contactSection ul li a:hover {
-  text-decoration: underline;
-}
-
-#contactSection, footer{
-  margin-top: 30px;
-  
-}
-
-footer {
-  text-align: center;
-
-  background-color: #333;
-  color: #fff;
-  width: 100%;
-  bottom: 0;
-  margin-top: 1200px;
-}
 
 .container{
  padding: 2rem; 
 }
 
 .slider-wrapper{
+  position: relative;
   max-width: 48rem;
   margin: 0 auto;
 }
@@ -470,7 +415,7 @@ footer {
   overflow-x:hidden ;
   scroll-snap-type:x mandatory;
   scroll-behavior: smooth;
-  box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0-.25);
+  box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
   border-radius: 0.5rem;
 }
 
@@ -484,7 +429,7 @@ footer {
   display: flex;
   column-gap: 1rem;
   position: absolute;
-  bottom: 1.25 rem;
+  bottom: 1.25rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -539,4 +484,70 @@ footer {
   font-weight: bold;
   color: #ff9100;
   text-decoration: none;
+}
+.exercises {
+  background-color: #bacfce;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+}
+
+.exercises h2 {
+  text-align: center;
+  font-size: 2em;
+  color: #141414;
+  margin-bottom: 20px;
+}
+
+.exercises p,
+.exercises ul li {
+  font-size: 1.1em;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.exercises ul li a {
+  font-weight: bold;
+  color: #5d3809fe;
+  text-decoration: none;
+}
+
+#languages{
+  margin-top: 100px;
+  margin-bottom: 70px;
+}
+
+#contactSection div{
+  padding: 20px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: #d8d0d0;
+  
+}
+#contactSection h2{
+  font-size: xx-large;
+}
+
+
+#contactSection span,#contactSection a,#contactSection h2, #contactSection li, #contactSection p{
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;  
+}
+
+#contactSection li{
+ padding-left: 30px; 
+}
+
+#contactSection a{
+  color: #003366;
+}
+#contactSection span{
+  color: #1100ff;
+  font-style: italic;
+}
+
+h1,a, li, td, p, h2, h3,th,button{
+  font-family: 'Courier New', Courier, monospace;
 }

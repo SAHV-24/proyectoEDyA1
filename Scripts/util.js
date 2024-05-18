@@ -25,45 +25,74 @@ button.addEventListener("click", function () {
 });
 
 function calcularScoreBoard(caso) {
-  caso = caso.value.split(";").map((x) => x.trim().split(" "));
-  let arr = [];
+  caso = input.value.split(";").map(x => x.split(" "));
+    let arr = [];
+    let equipos = [];
 
-  //Busca entre los 100 equipos
-  for (let j = 1; j <= 100; j++) {
-    // Filtra todos los arreglos que sean del equipo J
-    let FilteredArray = caso.filter((x) => x[0] === `Team${j}`);
+    caso.forEach(x => {
+      let temp = parseInt(x[0].replace('Team', '')) // Se le quita a la cadena la palabra team para que quede solo el número de equipo. 
+      equipos.push(temp)
+    })
 
-    let totalProblems = 0;
-    let totalTime = 0;
-
-    if (FilteredArray.length > 0) {
+    equipos = new Set(equipos) // Set para que quite los equipos repetidos 
+    equipos = Array.from(equipos) // Se convierte Set a Array de nuevo para poder recorrerlo.
+    console.log(equipos)
+    
+    for (let j = 0; j < equipos.length; j++) { // Solo recorre por el número de equipos que se reciben de la cadena
+      
+      const arregloFiltrado = caso.filter(x => x[0] === `Team${equipos[j]}`); // Se accede a los equipos por su posición en el array
+    
+      let problemasTotales = 0;
+      let tiempoTotal = 0;
+      
       for (let i = 1; i < 10; i++) {
-        let problemas = FilteredArray.filter((x) => x[1] == i); // Filtrar los X que tengan ese problema
 
-        if (problemas.length > 0) {
-          let band = 0;
-          let incorrects = 0; // respuestas incorrectas
-          let correctTime = 0; // tiempo de la respuesta correcta
-          problemas.forEach((x) => {
-            if (x[3].toLowerCase() == "i" && band == 0) {
-              incorrects++;
-            }
-            if (x[3].toLowerCase() == "c" && band == 0) {
-              band = 1;
-              correctTime = parseInt(x[2]);
-              totalProblems++;
-            }
-          });
-          if (correctTime != 0) {
-            totalTime += incorrects * 20 + correctTime;
-          }
-        }
+      let tiempoCorrecto = 0
+      let incorrectos = 0
+      let seCompleto = false
+  
+      arregloFiltrado.forEach(
+      
+          x => {
+  
+              if(!seCompleto){
+
+                if(x[1] == i && x[3].toLowerCase() === 'c'){
+              
+                tiempoCorrecto = parseInt(x[2])
+                seCompleto = true
+  
+                }
+
+              }
+                  
+  
+              if(x[1] == i && x[3].toLowerCase() === 'i'){
+  
+                  incorrectos++;
+  
+              }
+  
+      
+          })
+          
+  
+      if (seCompleto) { 
+
+        problemasTotales++;
+        tiempoTotal += incorrectos * 20 + tiempoCorrecto; // El tiempo total es el el tiempo correcto más 20 minutos por cada p. incorrecto.
+        
       }
-      if (totalTime > 0) {
-        arr.push([`Team${j}`, totalProblems, totalTime]);
-      }
+            
     }
+      
+    if (tiempoTotal > 0) {
+      arr.push([`Team${equipos[j]}`, problemasTotales, tiempoTotal]);
+    }
+      
   }
+
+
   let scoreboard = "";
   arr
     .sort(compare)

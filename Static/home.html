@@ -3,30 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICPC Competition</title>
+    <title>ICPC</title>
     <script type="module" src="../Scripts/util.js"></script>
     <link rel="stylesheet" href="../Styles/style.css">
+    <link rel="icon" href="./assets/icon/icpc-logo.ico">
 </head>
 <body>
-    <header>
+    
+        <header>
         <nav id="navBar">
-            <img src="./assets/placeholders/icpc-logo.png" width="90px" alt="ICPC Logo">
-            <ul>
-                <li id="selected"><a href="./home.html">Home</a></li>
-                <li><a href="./results.html">Live Results</a></li>
-            </ul>
+          <img src="./assets/placeholders/icpc-logo.png" width="90px" />
+          <ul>
+            <li id="selected"><a href="./home.html">Home </a></li>
+            <li ><a href="./results.html">Leaderboards</a></li>
+            <li><a href="./exercises.html">Coding Exercises</a></li>
+          </ul>
         </nav>
-    </header>
+      </header>
 
-    <main id="homeMain">
+     <main id="homeMain">
         <section id="welcomeSection">
             <h1>Welcome to the ICPC Competition</h1>
             <p>The International Collegiate Programming Contest (ICPC) is a multi-tier, team-based competition among universities from around the world.</p>
         </section>
         
+
+  
         <section class="container">
             <div class="slider-wrapper">
-                <div class="slider">
+                <div class="slider" id="slider">
                     <img id="slide-1" alt="A guy holding his prize for wining the acmc competition" src="./assets/placeholders/competition.jpg" alt="Competition Image" id="competitionImage">
                     <img id="slide-2" alt="Many people programming with a computer" src="./assets/placeholders/ICPC-2.jpg" alt="Competition Image" id="competitionImage">
                     <img id="slide-3" alt="4 students with beige shirt enjoying the competition!" src="./assets/placeholders/ICPC2015.jpg" alt="Competition Image" id="competitionImage">
@@ -39,24 +44,17 @@
             </div>
         </section>
 
-        <section id="exercisesSection">
-            <h2>Coding Exercises</h2>
-            <p>Improve your skills with these competitive programming exercises:</p>
-            <ul>
-                <li><a href="https://www.101computing.net/searching-sorting-algorithms-practice/">Exercise 1: Sorting Algorithms</a> - Implement various sorting algorithms and compare their efficiency.</li>
-                <li><a href="https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1">Exercise 2: Dynamic Programming</a> - Solve the classic knapsack problem using dynamic programming techniques.</li>
-                <li><a href="https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article">Exercise 3: Graph Theory</a> - Find the shortest path in a weighted graph using Dijkstra's algorithm.</li>
-            </ul>
-        </section>
 
         <section id="contactSection">
-            <h2>Contact Us</h2>
-            <p>For more information or inquiries, please reach out to us:</p>
-            <ul>
-                <li>Phone: +1 (555) 123-4567</li>
-                <li>Email: <a href="mailto:info@icpc.com">info@icpc.com</a></li>
-                <li>Address: 123 Programming Lane, Code City, CA 98765</li>
-            </ul>
+            <div>
+                <h2>Contact Us</h2><br/>
+                <p>For more information or inquiries, please reach out to us:</p><br>
+                <ul>
+                    <li><span>Phone:</span> +1 (555) 123-4567</li>
+                    <li><span>Email:</span> <a href="mailto:info@icpc.com">info@icpc.com</a></li>
+                    <li><span>Address:</span> 123 Programming Lane, Code City, CA 98765</li>
+                </ul>
+            </div>
         </section> 
     </main>
  
