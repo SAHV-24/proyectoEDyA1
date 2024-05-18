@@ -4,12 +4,10 @@ let results = document.getElementById("scoreboard");
 
 
 
-function compare(a, b) {
-  // Comparar los problemas
+function compare(a, b) {// Comparar los problemas
   if (a[1] > b[1]) return -1;
   if (a[1] < b[1]) return 1;
-  else {
-    // Si los problemas son iguales:
+  else {// Si los problemas son iguales:
     if (a[2] > b[2]) return 1;
     if (a[2] < b[2]) return -1;
     else {
@@ -96,7 +94,7 @@ function calcularScoreBoard(caso) {
   let scoreboard = "";
   arr
     .sort(compare)
-    .forEach(
+  arr.forEach(
       (x) =>
         (scoreboard += `<tr> <td class="col1"> ${x[0]}</td> <td class="col2"> ${x[1]}</td> <td class="col3"> ${x[2]}</td> </tr>`)
     );
