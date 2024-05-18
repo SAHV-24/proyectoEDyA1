@@ -2,6 +2,8 @@ let button = document.getElementById("button");
 let input = document.getElementById("input");
 let results = document.getElementById("scoreboard");
 
+
+
 function compare(a, b) {
   // Comparar los problemas
   if (a[1] > b[1]) return -1;
@@ -69,5 +71,17 @@ function calcularScoreBoard(caso) {
       (x) =>
         (scoreboard += `<tr> <td class="col1"> ${x[0]}</td> <td class="col2"> ${x[1]}</td> <td class="col3"> ${x[2]}</td> </tr>`)
     );
-  results.innerHTML = scoreboard;
+
+  if (arr.length===0){
+    scoreboard="ERROR"
+    input.value="ERROR"
+    results.textContent="ERROR";
+  }else{
+    results.innerHTML = scoreboard;
+    input.value=""
+  }
+
+  
 }
+
+
