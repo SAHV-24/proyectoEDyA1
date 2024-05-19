@@ -1,9 +1,3 @@
-let button = document.getElementById("button");
-let input = document.getElementById("input");
-let results = document.getElementById("scoreboard");
-
-
-
 function compare(a, b) {// Comparar los problemas
   if (a[1] > b[1]) return -1;
   if (a[1] < b[1]) return 1;
@@ -18,97 +12,85 @@ function compare(a, b) {// Comparar los problemas
   }
 }
 
+const input = document.getElementById("input")
+const button = document.getElementById("button")
+const results = document.getElementById("scoreboard");
+
 button.addEventListener("click", function () {
   calcularScoreBoard(input);
 });
 
-function calcularScoreBoard(caso) {
-  caso = input.value.split(";").map(x => x.split(" "));
-    let arr = [];
-    let equipos = [];
+function calcularScoreBoard(caso){
 
-    caso.forEach(x => {
-      let temp = parseInt(x[0].replace('Team', '')) // Se le quita a la cadena la palabra team para que quede solo el número de equipo. 
-      equipos.push(temp)
-    })
+  caso =input.value.split(";").map(x => x.split(" "))
 
-    equipos = new Set(equipos) // Set para que quite los equipos repetidos 
-    equipos = Array.from(equipos) // Se convierte Set a Array de nuevo para poder recorrerlo.
-    console.log(equipos)
-    
-    for (let j = 0; j < equipos.length; j++) { // Solo recorre por el número de equipos que se reciben de la cadena
-      
-      const arregloFiltrado = caso.filter(x => x[0] === `Team${equipos[j]}`); // Se accede a los equipos por su posición en el array
-    
-      let problemasTotales = 0;
-      let tiempoTotal = 0;
-      
-      for (let i = 1; i < 10; i++) {
+  let obj = {};
+  
+  caso.forEach(x => {
 
-      let tiempoCorrecto = 0
-      let incorrectos = 0
-      let seCompleto = false
-  
-      arregloFiltrado.forEach(
-      
-          x => {
-  
-              if(!seCompleto){
+      const teamName = x[0];
 
-                if(x[1] == i && x[3].toLowerCase() === 'c'){
-              
-                tiempoCorrecto = parseInt(x[2])
-                seCompleto = true
-  
-                }
-
-              }
-                  
-  
-              if(x[1] == i && x[3].toLowerCase() === 'i'){
-  
-                  incorrectos++;
-  
-              }
-  
-      
-          })
-          
-  
-      if (seCompleto) { 
-
-        problemasTotales++;
-        tiempoTotal += incorrectos * 20 + tiempoCorrecto; // El tiempo total es el el tiempo correcto más 20 minutos por cada p. incorrecto.
-        
+      if (!obj.hasOwnProperty(teamName)) { //Verifica si se ha creado una propiedad con el nombre del equipo, ejemplo obj:{} (NO TIENE NADA!) entocnes se le agregará el equipo y quedará:
+          obj[teamName] = {
+              totalTime: 0,
+              solvedProblems: 0
+          };
       }
-            
-    }
-      
-    if (tiempoTotal > 0) {
-      arr.push([`Team${equipos[j]}`, problemasTotales, tiempoTotal]);
-    }
-      
+
+      const problem = x[1];
+
+      if (!obj[teamName].hasOwnProperty(problem)) { //Verifica si en ese equipo no se ha creado ese problema 
+                                                //y sino crea el problema con los siguientes parámetros:
+          obj[teamName][problem] = {
+              incorrects: 0,
+              correctTime: 0,
+              isCompleted: false
+          };
+      }
+
+
+
+      if (x[3].toLowerCase() === 'i') { // si hay una incorrecta entonces que lo añ{ada}
+          obj[teamName][problem]['incorrects']++;
+      }
+
+      if (x[3].toLowerCase() === 'c') { // apenas encuentre la correcta entonces que haga los calculos
+          obj[teamName][problem]['correctTime'] = parseInt(x[2]);
+          obj[teamName][problem]['isCompleted'] = true;
+
+          // Calcular totalTime y aumentar solvedProblems
+          let correctTime = parseInt(obj[teamName][problem]['correctTime']);
+          let incorrects = parseInt(obj[teamName][problem]['incorrects']);
+
+          obj[teamName]['totalTime'] += correctTime + (incorrects * 20);
+          obj[teamName]['solvedProblems']++;
+      }
+
+  });
+
+  let result = [];
+
+  for (let team in obj) { // hacer el arreglo correspondiente para todos los teams que aparezcan O(teams)
+      let solvedProblems = obj[team]['solvedProblems'];
+      let totalTime = obj[team]['totalTime'];
+      result.push([team, solvedProblems, totalTime]);
   }
 
+  result.sort(compare); // método de ordenamiento
 
-  let scoreboard = "";
-  arr
-    .sort(compare)
-  arr.forEach(
+  let res=""
+  
+  result.forEach( // hacer que se vea en el html
       (x) =>
-        (scoreboard += `<tr> <td class="col1"> ${x[0]}</td> <td class="col2"> ${x[1]}</td> <td class="col3"> ${x[2]}</td> </tr>`)
+        (res += `<tr> <td class="col1"> ${x[0]}</td> <td class="col2"> ${x[1]}</td> <td class="col3"> ${x[2]}</td> </tr>`)
     );
 
-  if (arr.length===0){
-    scoreboard="ERROR"
-    input.value="ERROR"
-    results.textContent="ERROR";
+  if (result.length===0){
+      input.value="ERROR"
+      results.textContent="ERROR";
   }else{
-    results.innerHTML = scoreboard;
-    input.value=""
+      input.value=""
+      results.innerHTML = res;
   }
-
-  
 }
-
 
