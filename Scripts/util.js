@@ -39,7 +39,7 @@ function calcularScoreBoard(caso){
 
       const problem = x[1];
 
-      if (!obj[teamName].hasOwnProperty(problem)) { //Verifica si en ese equipo no se ha creado ese problema 
+      if (!obj[teamName].hasOwnProperty(problem)&& obj[teamName][problem]['isCompleted']==false) { //Verifica si en ese equipo no se ha creado ese problema 
                                                 //y sino crea el problema con los siguientes parámetros:
           obj[teamName][problem] = {
               incorrects: 0,
@@ -50,7 +50,7 @@ function calcularScoreBoard(caso){
 
 
 
-      if (x[3].toLowerCase() === 'i') { // si hay una incorrecta entonces que lo añ{ada}
+      if (x[3].toLowerCase() === 'i'&& obj[teamName][problem]['isCompleted']==false) { // si hay una incorrecta entonces que lo añ{ada}
           obj[teamName][problem]['incorrects']++;
       }
 
